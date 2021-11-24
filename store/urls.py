@@ -8,6 +8,7 @@ from django.contrib.auth import views as auth_views
 from .form import LoginForm, MyPasswordChangeForm, MyPasswordResetForm , MySetPasswordForm
 urlpatterns = [
     # path('', views.home,name="home"),
+    path('about/',views.about,name="about"),
     path('',views.ProductView.as_view(),name="home"),
     path('removeitem/',views.RemoveItem,name='removeitem'),
     path('product-detail/<int:pk>', views.ProductDetailView.as_view(), name='product-detail'),
@@ -17,6 +18,7 @@ urlpatterns = [
     path('profile/', views.Profile.as_view(), name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
+    path('successful_payment',views.successful_payment,name="successful_payment"),
     # path('changepassword/', views.change_password, name='changepassword'),
     path('mobile/', views.mobile, name='mobile'),
     path('mobile/<slug:data>', views.mobile, name='mobiledata'),
@@ -27,7 +29,7 @@ urlpatterns = [
     path('add_one/<int:pk>',views.add_one,name='add_one'),
     path('remove_one/<int:pk>',views.remove_one,name='remove_one'),
     path('paymentdone',views.paymentdone,name="paymentdone"),
-
+    path('handlerequest/',views.handlerequest,name = "handlerequest"),
 
     path('accounts/login/',auth_views.LoginView.as_view(template_name = 'store/login.html',authentication_form = LoginForm ),name = 'login'),
     path('logout/',auth_views.LogoutView.as_view(next_page = 'login'),name='logout'),

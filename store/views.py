@@ -4,6 +4,7 @@ from django.views import View
 from .models import Cart, Customer, OrderPlaced, Product
 from .form import CustomerProfileForm, CustomerRegistrationForm
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 class ProductView(View):
     def get(self,request):
@@ -14,7 +15,8 @@ class ProductView(View):
         total_cart_quantity = sum(cart_quantity)
         context = {'topwears':topwears,'bottomwears':bottomwears,'mobiles':mobiles,'total_cart_quantity':total_cart_quantity}
         return render(request,'store/home.html',context)
-
+def about(request):
+    return render(request,'store/about.html')
 
 
 class ProductDetailView(View):
@@ -172,6 +174,7 @@ def checkout(request):
                 total_amount = amount + Shipping
     cart_quantity = [p.quantity for p in Cart.objects.all() if p.user == request.user]
     total_cart_quantity = sum(cart_quantity)
+
     context = {'total_cart_quantity':total_cart_quantity,'users':users,'cart_items':cart_items,'total_amount' : total_amount ,'Shipping':Shipping,'amount':amount}
     return render(request, 'store/checkout.html',context)
 
@@ -236,6 +239,12 @@ def paymentdone(request):
     print(customer)
     print(cart)
 
-    return redirect('/orders/')
+    return redirect('/handlerequest/')
 
+
+
+def handlerequest(request):
+    return render(request,'store/pay.html')
+def successful_payment(request):
+    return render(request,'store/successful_payment.html')
  
