@@ -1,0 +1,49 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          Filter by Brands
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item " ><a href="{% url 'mobiledata' 'BTS' %}" style="color: black;">BTS</a></li>
+          <li class="list-group-item"><a href="{% url 'mobiledata' 'SAMSUNG' %}"style="color: black;">SAMSUNG</a></li>
+          <li class="list-group-item"><a href="{% url 'mobiledata' 'VIVO' %}"style="color: black;">VIVO</a></li>
+          <li class="list-group-item"><a href="{% url 'mobiledata' 'Apple' %}"style="color: black;">Apple</a></li>
+          <li class="list-group-item"><a href="{% url 'mobiledata' 'POCO' %}"style="color: black;">POCO</a></li>
+          <li class="list-group-item"><a href="{% url 'mobiledata' 'below' %}"style="color: black;">Below 10000</a></li>
+          <li class="list-group-item"><a href="{% url 'mobiledata' 'above' %}"style="color: black;">Above 10000</a></li>
+
+
+          
+        </ul>
+      </div>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+  <div class="row">
+    {% for m in mobiles  %}
+    <div class="col-4">
+        <div class="card m-5" style="width: 16rem;">
+            <img class="card-img-top" src="{{m.product_image.url}}" alt="Card image cap" style="height: 250px;">
+            <div class="card-body">
+                <h4>{{m.title}}</h4>
+                <h5 style="display: inline-block;"><strong>Rs. {{m.discounted_price|floatformat:2}}</strong></h5>
+                <br>
+                
+
+                <a class="btn btn-primary" href="{% url 'product-detail' m.id %}">VIEW</a>
+                
+            </div>
+          </div>
+          <br>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
